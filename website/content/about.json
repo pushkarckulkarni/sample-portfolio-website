@@ -1,0 +1,52 @@
+{
+  "_comment": "The About page. Photos live in content/about/principals and content/about/team.",
+
+  "firm": {
+    "title": "The Firm",
+    "paragraphs": [
+      "Sample Portfolio, a lorem ipsum architecture and interior design practice, was established in dolor sit amet. Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium."
+    ]
+  },
+
+  "philosophy": {
+    "title": "Design Philosophy",
+    "paragraphs": [
+      "At Sample Portfolio we are contextualists. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
+    ]
+  },
+
+  "principals": [
+    {
+      "name": "Lorem Ipsum",
+      "role": "Founder & Principal",
+      "photo": "principals/01.jpg",
+      "paragraphs": [
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat."
+      ]
+    },
+    {
+      "name": "Dolor Amet",
+      "role": "Principal & Partner",
+      "photo": "principals/02.jpg",
+      "paragraphs": [
+        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa quae ab illo inventore veritatis.",
+        "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora."
+      ]
+    }
+  ],
+
+  "team": [
+    { "name": "Lorem Ipsum 1", "role": "Senior Architect", "photo": "team/01.jpg" },
+    { "name": "Lorem Ipsum 2", "role": "Senior Architect", "photo": "team/02.jpg" },
+    { "name": "Lorem Ipsum 3", "role": "Architect",        "photo": "team/03.jpg" },
+    { "name": "Lorem Ipsum 4", "role": "Architect",        "photo": "team/04.jpg" },
+    { "name": "Lorem Ipsum 5", "role": "Interior Designer","photo": "team/05.jpg" },
+    { "name": "Lorem Ipsum 6", "role": "Interior Designer","photo": "team/06.jpg" },
+    { "name": "Lorem Ipsum 7", "role": "Junior Architect", "photo": "team/07.jpg" },
+    { "name": "Lorem Ipsum 8", "role": "Studio Manager",   "photo": "team/08.jpg" }
+  ]
+}

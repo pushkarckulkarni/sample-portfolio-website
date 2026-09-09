@@ -1,0 +1,716 @@
+/* ==========================================================================
+   SAMPLE PORTFOLIO — MODULE LIBRARY
+   Every block below maps 1:1 to a module in docs/02-MODULE-LIBRARY.md.
+   Naming: .block, .block__element, .block--modifier, .is-state
+   ========================================================================== */
+
+
+/* ==========================================================================
+   M-01  SITE HEADER
+   Fixed, full-bleed, white. Logo left / primary nav right / burger on mobile.
+   Optional second row (M-02 sub-nav) sits inside the same fixed shell so the
+   two never desync while scrolling.
+   ========================================================================== */
+
+.site-header{
+  position:fixed;inset:0 0 auto 0;
+  z-index:var(--z-header);
+  background:var(--c-bg);
+  transition:transform var(--dur-base) var(--ease),
+             box-shadow var(--dur-base) var(--ease);
+}
+/* Hairline only once the page has scrolled — keeps the top of the hero clean */
+.site-header.is-scrolled{box-shadow:0 1px 0 var(--c-rule)}
+
+/* Auto-hide on scroll-down, reveal on scroll-up (M-01 behaviour B) */
+.site-header.is-hidden{transform:translateY(-100%)}
+
+.site-header__bar{
+  height:var(--header-h);
+  display:flex;align-items:center;justify-content:space-between;
+  gap:var(--sp-6);
+  padding-inline:var(--gutter);
+}
+
+/* --- Logo ---------------------------------------------------------------- */
+.site-logo{
+  display:inline-flex;align-items:baseline;gap:.5em;
+  font-family:var(--font-ui);
+  font-size:clamp(.9375rem,.86rem + .32vw,1.1875rem);
+  font-weight:var(--fw-medium);
+  text-transform:uppercase;
+  letter-spacing:.2em;
+  color:var(--c-ink);
+  white-space:nowrap;
+}
+.site-logo__mark{font-weight:var(--fw-medium)}
+.site-logo__sub{
+  font-size:var(--fs-nano);
+  font-weight:var(--fw-light);
+  letter-spacing:var(--ls-chrome);
+  color:var(--c-ink-mute);
+}
+@media (max-width:599px){ .site-logo__sub{display:none} }
+
+/* --- Primary nav --------------------------------------------------------- */
+.nav-primary__list{display:flex;align-items:center;gap:clamp(20px,2.6vw,48px)}
+
+.nav-primary__link{
+  position:relative;display:block;
+  font-family:var(--font-ui);
+  font-size:var(--fs-nano);
+  font-weight:var(--fw-regular);
+  line-height:var(--lh-ui);
+  text-transform:uppercase;
+  letter-spacing:var(--ls-chrome);
+  color:var(--c-ink);
+  padding-block:var(--sp-2);
+  transition:color var(--dur-fast) var(--ease);
+}
+/* Underline grows from left on hover; sits permanently under the active item */
+.nav-primary__link::after{
+  content:"";position:absolute;left:0;bottom:0;
+  width:100%;height:1px;background:currentColor;
+  transform:scaleX(0);transform-origin:left;
+  transition:transform var(--dur-base) var(--ease);
+}
+.nav-primary__link:hover::after,
+.nav-primary__link:focus-visible::after{transform:scaleX(1)}
+.nav-primary__item.is-active > .nav-primary__link{color:var(--c-ink)}
+.nav-primary__item.is-active > .nav-primary__link::after{transform:scaleX(1)}
+
+/* --- Desktop dropdown (PROJECTS ▸ categories, NEWS ▸ tabs) ---------------
+   Opens on hover AND on focus-within so it is keyboard reachable.        */
+.nav-primary__item{position:relative}
+
+.nav-drop{
+  position:absolute;top:100%;left:50%;
+  transform:translate(-50%,-6px);
+  min-width:190px;
+  background:var(--c-bg);
+  border:1px solid var(--c-rule);
+  padding:var(--sp-4) 0;
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity var(--dur-base) var(--ease),
+             transform var(--dur-base) var(--ease),
+             visibility 0s linear var(--dur-base);
+}
+.nav-primary__item:hover > .nav-drop,
+.nav-primary__item:focus-within > .nav-drop{
+  opacity:1;visibility:visible;pointer-events:auto;
+  transform:translate(-50%,0);
+  transition-delay:0s;
+}
+.nav-drop__link{
+  display:block;
+  padding:var(--sp-2) var(--sp-5);
+  font-family:var(--font-ui);
+  font-size:var(--fs-nano);
+  text-transform:uppercase;
+  letter-spacing:var(--ls-tab);
+  color:var(--c-ink-mute);
+  white-space:nowrap;
+  transition:color var(--dur-fast) var(--ease);
+}
+.nav-drop__link:hover,.nav-drop__link.is-active{color:var(--c-ink)}
+
+/* --- Burger -------------------------------------------------------------- */
+.nav-toggle{
+  display:none;
+  width:28px;height:18px;position:relative;flex:0 0 auto;
+}
+.nav-toggle__bar{
+  position:absolute;left:0;width:100%;height:1px;
+  background:var(--c-ink);
+  transition:transform var(--dur-base) var(--ease),
+             opacity var(--dur-fast) var(--ease);
+}
+.nav-toggle__bar:nth-child(1){top:0}
+.nav-toggle__bar:nth-child(2){top:50%;margin-top:-.5px}
+.nav-toggle__bar:nth-child(3){bottom:0}
+.nav-toggle.is-open .nav-toggle__bar:nth-child(1){transform:translateY(8.5px) rotate(45deg)}
+.nav-toggle.is-open .nav-toggle__bar:nth-child(2){opacity:0}
+.nav-toggle.is-open .nav-toggle__bar:nth-child(3){transform:translateY(-8.5px) rotate(-45deg)}
+
+
+/* ==========================================================================
+   M-02  SUB-NAVIGATION / FILTER TABS
+   Second row of the header on Projects & News. Centred on desktop,
+   horizontally scrollable (no wrap, no scrollbar) on mobile.
+   ========================================================================== */
+
+.subnav{
+  border-top:1px solid var(--c-rule);
+  background:var(--c-bg);
+}
+.subnav__list{
+  display:flex;justify-content:center;align-items:center;
+  gap:clamp(18px,2.4vw,44px);
+  height:40px;
+  padding-inline:var(--gutter);
+  overflow-x:auto;
+  scrollbar-width:none;-ms-overflow-style:none;
+  scroll-snap-type:x proximity;
+}
+.subnav__list::-webkit-scrollbar{display:none}
+.subnav__item{flex:0 0 auto;scroll-snap-align:center}
+
+.subnav__link{
+  display:block;
+  font-family:var(--font-ui);
+  font-size:var(--fs-nano);
+  text-transform:uppercase;
+  letter-spacing:var(--ls-tab);
+  color:var(--c-ink-mute);
+  white-space:nowrap;
+  padding-block:var(--sp-2);
+  border-bottom:1px solid transparent;
+  transition:color var(--dur-fast) var(--ease),
+             border-color var(--dur-fast) var(--ease);
+}
+.subnav__link:hover{color:var(--c-ink)}
+.subnav__link.is-active{color:var(--c-ink);border-bottom-color:var(--c-ink)}
+
+
+/* ==========================================================================
+   M-03  MOBILE MENU  (full-screen overlay panel)
+   ========================================================================== */
+
+.mobile-menu{
+  position:fixed;inset:0;
+  z-index:var(--z-menu);
+  background:var(--c-overlay);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  padding:calc(var(--header-h-mob) + var(--sp-8)) var(--gutter) var(--sp-8);
+  overflow-y:auto;overscroll-behavior:contain;
+  opacity:0;visibility:hidden;
+  transition:opacity var(--dur-base) var(--ease),
+             visibility 0s linear var(--dur-base);
+}
+.mobile-menu.is-open{
+  opacity:1;visibility:visible;transition-delay:0s;
+}
+
+.mobile-menu__link{
+  display:block;
+  padding-block:var(--sp-4);
+  font-family:var(--font-ui);
+  font-size:1.375rem;
+  font-weight:var(--fw-light);
+  text-transform:uppercase;
+  letter-spacing:var(--ls-chrome);
+  color:var(--c-ink);
+  border-bottom:1px solid var(--c-rule);
+  /* staggered reveal — --i set inline per item */
+  opacity:0;transform:translateY(10px);
+  transition:opacity var(--dur-base) var(--ease),
+             transform var(--dur-base) var(--ease);
+  transition-delay:calc(var(--i,0) * 45ms + 90ms);
+}
+.mobile-menu.is-open .mobile-menu__link{opacity:1;transform:none}
+
+.mobile-menu__sub{padding:var(--sp-2) 0 var(--sp-4) var(--sp-4)}
+.mobile-menu__sublink{
+  display:block;padding-block:var(--sp-2);
+  font-family:var(--font-ui);
+  font-size:var(--fs-micro);
+  text-transform:uppercase;
+  letter-spacing:var(--ls-tab);
+  color:var(--c-ink-mute);
+}
+.mobile-menu__sublink.is-active{color:var(--c-ink)}
+
+.mobile-menu__foot{
+  margin-top:var(--sp-8);
+  font-size:var(--fs-micro);
+  color:var(--c-ink-mute);
+}
+
+
+/* ==========================================================================
+   M-04  HERO SLIDER  (homepage)
+   Full-viewport crossfade. Slides stack; only opacity animates, so it stays
+   at 60fps even on low-end Android. Ken Burns is a slow scale on the img.
+   ========================================================================== */
+
+.hero{
+  position:relative;
+  height:100svh;                 /* svh avoids the iOS URL-bar jump */
+  min-height:520px;
+  overflow:hidden;
+  background:var(--c-bg-alt);
+}
+
+.hero__slide{
+  position:absolute;inset:0;
+  opacity:0;
+  transition:opacity var(--dur-hero) var(--ease-soft);
+}
+.hero__slide.is-active{opacity:1;z-index:2}
+
+.hero__img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:center;
+  transform:scale(1.06);
+  transition:transform 7000ms linear;
+}
+.hero__slide.is-active .hero__img{transform:scale(1)}
+
+/* Caption, bottom-left, above a soft gradient so white type stays legible */
+.hero__caption{
+  position:absolute;left:var(--gutter);bottom:clamp(72px,9vh,120px);
+  z-index:3;color:var(--c-on-image);max-width:min(560px,72vw);
+  text-shadow:0 1px 24px rgba(0,0,0,.35);
+}
+.hero__scrim{
+  position:absolute;inset:auto 0 0 0;height:45%;z-index:2;
+  background:linear-gradient(to top,rgba(0,0,0,.42),transparent);
+  pointer-events:none;
+}
+.hero__title{
+  color:var(--c-on-image);font-size:var(--fs-h2);font-weight:var(--fw-light);
+  letter-spacing:.01em;
+}
+.hero__meta{
+  margin-top:var(--sp-2);
+  font-family:var(--font-ui);font-size:var(--fs-micro);
+  text-transform:uppercase;letter-spacing:var(--ls-caption);
+  color:var(--c-on-image-soft);
+}
+
+/* Dot pagination, bottom-right */
+.hero__dots{
+  position:absolute;right:var(--gutter);bottom:clamp(72px,9vh,120px);
+  z-index:4;display:flex;gap:var(--sp-3);
+}
+.hero__dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--c-on-image-dim);
+  transition:background var(--dur-fast) var(--ease),
+             transform var(--dur-fast) var(--ease);
+}
+.hero__dot.is-active{background:var(--c-on-image);transform:scale(1.35)}
+
+/* Scroll cue, bottom-centre */
+.hero__cue{
+  position:absolute;left:50%;bottom:var(--sp-6);
+  z-index:4;transform:translateX(-50%);
+  display:grid;justify-items:center;gap:var(--sp-2);
+  font-family:var(--font-ui);font-size:var(--fs-nano);
+  text-transform:uppercase;letter-spacing:var(--ls-chrome);
+  color:var(--c-on-image-soft);
+}
+.hero__cue-line{
+  width:1px;height:38px;background:var(--c-on-image-soft);
+  transform-origin:top;
+  animation:cue 2.2s var(--ease-soft) infinite;
+}
+@keyframes cue{
+  0%  {transform:scaleY(0);opacity:0}
+  40% {transform:scaleY(1);opacity:1}
+  100%{transform:scaleY(1) translateY(38px);opacity:0}
+}
+
+/* Left / right invisible click zones (desktop only) */
+.hero__nav{
+  position:absolute;top:0;bottom:0;width:14%;z-index:3;
+  cursor:pointer;background:none;
+}
+.hero__nav--prev{left:0}
+.hero__nav--next{right:0}
+@media (max-width:899px){ .hero__nav{display:none} }
+
+
+/* ==========================================================================
+   M-05  PROJECT GRID + CARD
+   3-up desktop / 2-up tablet / 1-up phone. Fixed 4:3 tile, caption below.
+   ========================================================================== */
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  column-gap:var(--grid-gap-x);
+  row-gap:var(--grid-gap-y);
+}
+.grid--2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid--4{grid-template-columns:repeat(4,minmax(0,1fr))}
+
+.card{display:block;position:relative}
+
+.card__media{
+  position:relative;overflow:hidden;
+  aspect-ratio:var(--ar-card);
+  background:var(--c-bg-alt);
+}
+.card__img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform var(--dur-slow) var(--ease),
+             opacity var(--dur-base) var(--ease);
+}
+.card:hover .card__img{transform:scale(var(--img-zoom))}
+
+/* Caption sits below the image, left-aligned, never overlaid */
+.card__body{padding-top:var(--sp-4)}
+.card__title{
+  font-family:var(--font-ui);
+  font-size:var(--fs-h4);
+  font-weight:var(--fw-regular);
+  color:var(--c-ink);
+  letter-spacing:var(--ls-title);
+}
+.card__meta{
+  margin-top:var(--sp-1);
+  font-family:var(--font-ui);
+  font-size:var(--fs-micro);
+  text-transform:uppercase;
+  letter-spacing:var(--ls-caption);
+  color:var(--c-ink-mute);
+}
+
+/* Non-active tiles dim when the grid is hovered — classic portfolio move */
+@media (hover:hover) and (min-width:900px){
+  .grid--dim:hover .card{opacity:.55;transition:opacity var(--dur-base) var(--ease)}
+  .grid--dim:hover .card:hover{opacity:1}
+}
+
+/* Filtering: JS toggles .is-hidden */
+.card.is-hidden{display:none}
+
+/* Pagination batching: mark cards past the first page with this attribute
+   and the Load More button will reveal them in steps. */
+.card[data-batch-hidden]{display:none}
+
+
+/* ==========================================================================
+   M-06  PAGINATION / LOAD MORE
+   ========================================================================== */
+
+.pager{
+  display:flex;justify-content:center;align-items:center;gap:var(--sp-5);
+  margin-top:var(--sp-9);
+}
+.pager__btn{
+  font-family:var(--font-ui);
+  font-size:var(--fs-nano);
+  text-transform:uppercase;
+  letter-spacing:var(--ls-chrome);
+  color:var(--c-ink);
+  padding:var(--sp-3) var(--sp-7);
+  border:1px solid var(--c-rule-strong);
+  transition:background var(--dur-fast) var(--ease),
+             color var(--dur-fast) var(--ease),
+             border-color var(--dur-fast) var(--ease);
+}
+.pager__btn:hover{background:var(--c-ink);color:var(--c-bg);border-color:var(--c-ink)}
+.pager__btn[disabled]{opacity:.35;pointer-events:none}
+
+
+/* ==========================================================================
+   M-07  PROJECT DETAIL BLOCKS
+   ========================================================================== */
+
+/* Full-bleed hero for a single project */
+.pd-hero{
+  position:relative;height:82svh;min-height:420px;
+  overflow:hidden;background:var(--c-bg-alt);
+}
+.pd-hero__img{width:100%;height:100%;object-fit:cover}
+
+/* Title block under the hero */
+.pd-head{text-align:center;padding-block:var(--section-y) var(--sp-6)}
+.pd-head__title{font-size:var(--fs-h1);font-weight:var(--fw-light)}
+.pd-head__meta{
+  margin-top:var(--sp-3);
+  font-family:var(--font-ui);font-size:var(--fs-micro);
+  text-transform:uppercase;letter-spacing:var(--ls-caption);
+  color:var(--c-ink-mute);
+}
+
+/* Intro copy — centred, capped measure */
+.pd-intro{
+  max-width:var(--max-prose);margin-inline:auto;
+  font-size:var(--fs-lead);line-height:var(--lh-body);
+  padding-block:var(--sp-6) var(--section-y);
+}
+
+/* Image sequence. Alternate .figure--full / --wide / --pair for rhythm. */
+.figure{margin-block:var(--sp-7)}
+.figure--full  {max-width:none;padding-inline:0}
+.figure--wide  {max-width:var(--max-wide);margin-inline:auto}
+.figure--narrow{max-width:var(--max-prose);margin-inline:auto}
+
+.figure__img{
+  width:100%;aspect-ratio:var(--ar-detail);
+  object-fit:cover;background:var(--c-bg-alt);
+  cursor:zoom-in;
+}
+.figure__cap{
+  margin-top:var(--sp-3);
+  font-family:var(--font-ui);font-size:var(--fs-micro);
+  text-transform:uppercase;letter-spacing:var(--ls-caption);
+  color:var(--c-ink-mute);
+}
+
+/* Two images side by side; stacks below 700px (see responsive.css) */
+.figure-pair{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:var(--grid-gap-x);
+  margin-block:var(--sp-7);
+}
+
+/* Pull quote between image runs */
+.pullquote{
+  max-width:var(--max-narrow);margin:var(--section-y) auto;
+  text-align:center;
+  font-family:var(--font-ui);
+  font-size:var(--fs-quote);
+  font-weight:var(--fw-light);
+  line-height:1.45;
+  color:var(--c-ink);
+}
+
+/* Credits — two-column definition list */
+.credits{
+  max-width:var(--max-wide);margin-inline:auto;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:var(--sp-6) var(--sp-7);
+  padding-block:var(--section-y);
+  border-top:1px solid var(--c-rule);
+}
+.credits__key{
+  font-family:var(--font-ui);font-size:var(--fs-nano);
+  text-transform:uppercase;letter-spacing:var(--ls-chrome);
+  color:var(--c-ink-mute);margin-bottom:var(--sp-2);
+}
+.credits__val{font-size:var(--fs-small);color:var(--c-ink)}
+
+/* Prev / index / next footer nav */
+.pd-nav{
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  gap:var(--sp-5);
+  padding-block:var(--sp-7);
+  border-top:1px solid var(--c-rule);
+  font-family:var(--font-ui);font-size:var(--fs-nano);
+  text-transform:uppercase;letter-spacing:var(--ls-chrome);
+}
+.pd-nav__next{text-align:right}
+.pd-nav__index{color:var(--c-ink-mute)}
+.pd-nav a{color:var(--c-ink);transition:opacity var(--dur-fast) var(--ease)}
+.pd-nav a:hover{opacity:.55}
+
+
+/* ==========================================================================
+   M-08  LIGHTBOX
+   ========================================================================== */
+
+.lightbox{
+  position:fixed;inset:0;z-index:var(--z-lightbox);
+  background:var(--c-scrim);
+  display:grid;place-items:center;
+  padding:var(--sp-7) var(--gutter);
+  opacity:0;visibility:hidden;
+  transition:opacity var(--dur-base) var(--ease),
+             visibility 0s linear var(--dur-base);
+}
+.lightbox.is-open{opacity:1;visibility:visible;transition-delay:0s}
+.lightbox__img{max-width:100%;max-height:86svh;object-fit:contain}
+.lightbox__close,
+.lightbox__prev,
+.lightbox__next{
+  position:absolute;color:var(--c-on-image);font-size:1.5rem;line-height:1;
+  padding:var(--sp-4);opacity:.75;
+  transition:opacity var(--dur-fast) var(--ease);
+}
+.lightbox__close:hover,.lightbox__prev:hover,.lightbox__next:hover{opacity:1}
+.lightbox__close{top:var(--sp-3);right:var(--sp-3)}
+.lightbox__prev {left:var(--sp-2);top:50%;transform:translateY(-50%)}
+.lightbox__next {right:var(--sp-2);top:50%;transform:translateY(-50%)}
+.lightbox__count{
+  position:absolute;bottom:var(--sp-5);left:50%;transform:translateX(-50%);
+  color:var(--c-on-image-soft);
+  font-family:var(--font-ui);font-size:var(--fs-micro);
+  letter-spacing:var(--ls-caption);
+}
+
+
+/* ==========================================================================
+   M-09  ABOUT BLOCKS
+   ========================================================================== */
+
+.about-section{
+  padding-block:var(--section-y-lg);
+  border-top:1px solid var(--c-rule);
+  scroll-margin-top:calc(var(--header-h-sub) + var(--sp-5));
+}
+.about-section:first-of-type{border-top:0}
+
+.about-section__head{margin-bottom:var(--sp-7)}
+.about-section__title{
+  font-family:var(--font-ui);font-size:var(--fs-nano);
+  font-weight:var(--fw-medium);
+  text-transform:uppercase;letter-spacing:var(--ls-chrome);
+  color:var(--c-ink-mute);
+}
+
+/* Principals: portrait left, bio right */
+.principal{
+  display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);
+  gap:clamp(24px,4vw,72px);
+  align-items:start;
+}
+.principal + .principal{margin-top:var(--section-y)}
+.principal__img{
+  width:100%;aspect-ratio:var(--ar-portrait);
+  object-fit:cover;background:var(--c-bg-alt);
+}
+.principal__name{font-size:var(--fs-h3);font-weight:var(--fw-light)}
+.principal__role{
+  margin-top:var(--sp-1);margin-bottom:var(--sp-5);
+  font-family:var(--font-ui);font-size:var(--fs-micro);
+  text-transform:uppercase;letter-spacing:var(--ls-caption);
+  color:var(--c-ink-mute);
+}
+
+/* Team: 4-up square portrait grid */
+.team-card__img{
+  width:100%;aspect-ratio:var(--ar-square);
+  object-fit:cover;background:var(--c-bg-alt);
+  filter:grayscale(1);
+  transition:filter var(--dur-base) var(--ease);
+}
+.team-card:hover .team-card__img{filter:grayscale(0)}
+.team-card__name{
+  margin-top:var(--sp-3);
+  font-family:var(--font-ui);font-size:var(--fs-h4);
+  font-weight:var(--fw-regular);color:var(--c-ink);
+}
+.team-card__role{
+  margin-top:2px;
+  font-family:var(--font-ui);font-size:var(--fs-micro);
+  text-transform:uppercase;letter-spacing:var(--ls-caption);
+  color:var(--c-ink-mute);
+}
+
+
+/* ==========================================================================
+   M-10  NEWS
+   ========================================================================== */
+
+.news-card__media{
+  aspect-ratio:var(--ar-news);overflow:hidden;background:var(--c-bg-alt);
+}
+.news-card__img{width:100%;height:100%;object-fit:cover;
+  transition:transform var(--dur-slow) var(--ease)}
+.news-card:hover .news-card__img{transform:scale(var(--img-zoom))}
+.news-card__body{padding-top:var(--sp-4);font-size:var(--fs-small);
+  line-height:1.65;color:var(--c-ink-soft)}
+.news-card__body strong{color:var(--c-ink);font-weight:var(--fw-medium)}
+.news-card__date{
+  margin-top:var(--sp-3);
+  font-family:var(--font-ui);font-size:var(--fs-micro);
+  text-transform:uppercase;letter-spacing:var(--ls-caption);
+  color:var(--c-ink-mute);
+}
+
+/* Awards / Magazines / Books — long single-column reference lists */
+.reflist{max-width:var(--max-prose)}
+.reflist__year{
+  margin-top:var(--sp-8);margin-bottom:var(--sp-4);
+  font-family:var(--font-ui);font-size:var(--fs-nano);
+  font-weight:var(--fw-medium);
+  text-transform:uppercase;letter-spacing:var(--ls-chrome);
+  color:var(--c-ink);
+  padding-bottom:var(--sp-2);border-bottom:1px solid var(--c-rule);
+}
+.reflist__year:first-child{margin-top:0}
+.reflist__item{padding-block:var(--sp-3);font-size:var(--fs-small);
+  line-height:1.7;color:var(--c-ink-soft)}
+.reflist__item strong{color:var(--c-ink)}
+
+
+/* ==========================================================================
+   M-11  CONTACT
+   ========================================================================== */
+
+.contact{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:var(--section-y) var(--sp-8);
+}
+.contact__block > .u-label{display:block;margin-bottom:var(--sp-4);color:var(--c-ink)}
+.contact__block p{font-size:var(--fs-small);line-height:1.9}
+.contact__link{
+  border-bottom:1px solid var(--c-rule-strong);
+  transition:border-color var(--dur-fast) var(--ease);
+}
+.contact__link:hover{border-color:var(--c-ink)}
+.contact__map{
+  grid-column:1/-1;aspect-ratio:21/9;background:var(--c-bg-alt);
+  filter:grayscale(1) contrast(1.05);
+}
+
+
+/* ==========================================================================
+   M-12  SITE FOOTER
+   ========================================================================== */
+
+.site-footer{
+  border-top:1px solid var(--c-rule);
+  padding-block:var(--sp-7);
+  font-family:var(--font-ui);
+  font-size:var(--fs-micro);
+  letter-spacing:var(--ls-caption);
+  color:var(--c-ink-mute);
+}
+.site-footer__row{
+  display:flex;flex-wrap:wrap;align-items:center;
+  justify-content:space-between;gap:var(--sp-4) var(--sp-6);
+}
+.site-footer a{transition:color var(--dur-fast) var(--ease)}
+.site-footer a:hover{color:var(--c-ink)}
+.site-footer__social{display:flex;gap:var(--sp-5);text-transform:uppercase}
+
+
+/* ==========================================================================
+   M-13  BACK-TO-TOP
+   ========================================================================== */
+
+.to-top{
+  position:fixed;right:var(--gutter);bottom:var(--sp-6);
+  z-index:var(--z-sticky);
+  width:44px;height:44px;
+  display:grid;place-items:center;
+  background:var(--c-bg);border:1px solid var(--c-rule-strong);
+  color:var(--c-ink);
+  opacity:0;transform:translateY(10px);pointer-events:none;
+  transition:opacity var(--dur-base) var(--ease),
+             transform var(--dur-base) var(--ease);
+}
+.to-top.is-visible{opacity:1;transform:none;pointer-events:auto}
+
+
+/* ==========================================================================
+   M-14  SCROLL REVEAL
+   Opt-in via [data-reveal]. IntersectionObserver adds .is-in.
+   Falls back to visible if JS fails (see the .no-js rule in base HTML).
+   ========================================================================== */
+
+[data-reveal]{
+  opacity:0;transform:translateY(18px);
+  transition:opacity var(--dur-slow) var(--ease),
+             transform var(--dur-slow) var(--ease);
+}
+[data-reveal].is-in{opacity:1;transform:none}
+[data-reveal][data-reveal-delay="1"]{transition-delay:90ms}
+[data-reveal][data-reveal-delay="2"]{transition-delay:180ms}
+[data-reveal][data-reveal-delay="3"]{transition-delay:270ms}
+@media (prefers-reduced-motion:reduce){
+  [data-reveal]{opacity:1;transform:none}
+}
+
+
+/* ==========================================================================
+   M-15  LAZY IMAGE FADE-IN
+   ========================================================================== */
+img[loading="lazy"]{opacity:0;transition:opacity var(--dur-base) var(--ease)}
+img[loading="lazy"].is-loaded,
+img[loading="lazy"][data-loaded]{opacity:1}

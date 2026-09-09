@@ -1,0 +1,19 @@
+FONTS GO HERE
+============================================================
+Download Jost and Inter from Google Fonts, subset them to
+Latin, and save them with exactly these names:
+
+    jost-300.woff2
+    jost-400.woff2
+    jost-500.woff2
+    inter-300.woff2
+    inter-400.woff2
+
+The @font-face rules are already written in
+assets/css/base.css — nothing else to do.
+
+Until these files exist the site falls back to
+Futura / Century Gothic / system-ui, which looks close
+but not identical.
+
+Full instructions: docs/08-DEPLOY.md

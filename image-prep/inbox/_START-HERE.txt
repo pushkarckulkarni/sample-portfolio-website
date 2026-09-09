@@ -1,0 +1,24 @@
+IMAGE INBOX
+============================================================
+Put your original photographs here — any size, any resolution,
+straight from the camera or the photographer. 15 MB files are fine.
+
+WHERE THINGS GO
+    home/hero/               homepage banner slideshow
+    home/hero-mobile/        the same slides, portrait crop for phones
+    projects/<slug>/         cover.jpg, hero.jpg and gallery/
+    about/principals/        principal portraits
+    about/team/              team headshots
+    news/                    news card images
+
+Each folder has a _README.txt telling you exactly what it produces.
+
+THEN RUN ONE OF THESE
+    python3 image-prep/studio.py      visual control panel (recommended)
+    python3 image-prep/process.py     straight from the terminal
+
+AND THEN
+    python3 tools/build.py            rebuild the site
+
+Originals are moved to image-prep/archive/ after processing,
+so nothing is ever destroyed.

@@ -1,0 +1,77 @@
+{
+  "_comment": [
+    "Every folder inside inbox/ maps to one preset. The preset decides the final",
+    "pixel size, the crop ratio and the file-size budget.",
+    "",
+    "IMPORTANT: 'width' and 'height' here MUST match the DIMS table in",
+    "tools/build.py. They are written into the HTML width/height attributes,",
+    "and if they disagree the page will shift as images load.",
+    "",
+    "maxKB is a budget, not a target. The processor searches for the highest",
+    "JPEG quality that still fits under it, so a simple image ends up smaller",
+    "and sharper than a busy one."
+  ],
+
+  "defaults": {
+    "dpi": 72,
+    "anchor": "smart",
+    "minQuality": 55,
+    "maxQuality": 88,
+    "stripMetadata": true,
+    "format": "jpg"
+  },
+
+  "presets": {
+    "hero": {
+      "label": "Home / project banner (landscape)",
+      "width": 2400, "height": 1350, "ratio": "16:9",
+      "maxKB": 320, "maxQuality": 84
+    },
+    "hero-mobile": {
+      "label": "Home banner, phone crop (portrait)",
+      "width": 1200, "height": 1500, "ratio": "4:5",
+      "maxKB": 220
+    },
+    "cover": {
+      "label": "Project grid thumbnail",
+      "width": 1200, "height": 900, "ratio": "4:3",
+      "maxKB": 180
+    },
+    "gallery": {
+      "label": "Project detail photo",
+      "width": 2000, "height": 1333, "ratio": "3:2",
+      "maxKB": 280
+    },
+    "principal": {
+      "label": "Principal portrait",
+      "width": 900, "height": 1125, "ratio": "4:5",
+      "maxKB": 150, "anchor": "top"
+    },
+    "team": {
+      "label": "Team headshot (square)",
+      "width": 700, "height": 700, "ratio": "1:1",
+      "maxKB": 110, "anchor": "top"
+    },
+    "news": {
+      "label": "News card image",
+      "width": 1000, "height": 750, "ratio": "4:3",
+      "maxKB": 150
+    }
+  },
+
+  "_routing_comment": [
+    "Which preset applies to which inbox folder. First match wins.",
+    "Patterns are matched against the path relative to inbox/, using / separators."
+  ],
+
+  "routing": [
+    { "match": "home/hero-mobile/*",   "preset": "hero-mobile", "out": "home/hero-mobile",       "rename": "seq" },
+    { "match": "home/hero/*",          "preset": "hero",        "out": "home/hero",              "rename": "seq" },
+    { "match": "projects/*/gallery/*", "preset": "gallery",     "out": "projects/{p1}/gallery",  "rename": "seq" },
+    { "match": "projects/*/cover*",    "preset": "cover",       "out": "projects/{p1}",          "rename": "cover" },
+    { "match": "projects/*/hero*",     "preset": "hero",        "out": "projects/{p1}",          "rename": "hero" },
+    { "match": "about/principals/*",   "preset": "principal",   "out": "about/principals",       "rename": "seq" },
+    { "match": "about/team/*",         "preset": "team",        "out": "about/team",             "rename": "seq" },
+    { "match": "news/*",               "preset": "news",        "out": "news",                   "rename": "seq" }
+  ]
+}

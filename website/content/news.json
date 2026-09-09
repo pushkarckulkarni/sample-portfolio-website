@@ -1,0 +1,67 @@
+{
+  "_comment": "News, Press, Awards and Books. Use <strong> in text for the bold runs. Images live in content/news.",
+
+  "highlights": [
+    { "photo": "01.jpg", "date": "March 2026",     "url": "#", "text": "<strong>Sample Portfolio</strong> wins two awards at the <strong>Lorem Design Honours</strong> 2026 for <strong>Top 10 Houses</strong>." },
+    { "photo": "02.jpg", "date": "January 2026",   "url": "#", "text": "<strong>Dolor Sit Villa</strong> featured as the <strong>Cover Story</strong> in <strong>Ipsum Review</strong>." },
+    { "photo": "03.jpg", "date": "November 2025",  "url": "#", "text": "<strong>Consectetur Clubhouse</strong> shortlisted at the <strong>World Lorem Festival</strong>, Singapore." },
+    { "photo": "04.jpg", "date": "September 2025", "url": "#", "text": "We are included in <strong>Adipiscing Digest</strong>'s list of the <strong>100 Most Influential</strong> practices." },
+    { "photo": "05.jpg", "date": "July 2025",      "url": "#", "text": "<strong>Elit Sed Offices</strong> judged Winner at the prestigious <strong>Tempor Awards</strong> 2025." },
+    { "photo": "06.jpg", "date": "May 2025",       "url": "#", "text": "We feature on the cover of the newly launched book <strong>Timeless Lorem</strong>, Ipsum Publishers." },
+    { "photo": "07.jpg", "date": "March 2025",     "url": "#", "text": "<strong>Incididunt Campus</strong> is a Finalist in the Education Category of the <strong>Labore Festival</strong>." },
+    { "photo": "08.jpg", "date": "January 2025",   "url": "#", "text": "<strong>Magna Aliqua Library</strong> featured on <strong>ArchLorem</strong>." },
+    { "photo": "09.jpg", "date": "November 2024",  "url": "#", "text": "Founder speaks at <strong>Veniam Design Dialogue 2024</strong>, New Delhi." }
+  ],
+
+  "press": [
+    { "group": "International", "items": [
+      "<strong>Maison &amp; Lorem,</strong> Greece, 'The Ipsum House' (Cover Story), 2026",
+      "<strong>AD Dolor,</strong> France, '25 Best Holiday Homes', p. 140, 2025",
+      "<strong>Futurarc Sit,</strong> Singapore, 'Architecture of Learning', p. 70-75, 2025",
+      "<strong>Cubes Amet,</strong> Singapore, 'Strong Poetry', p. 122-129, 2024",
+      "<strong>Elle Consectetur,</strong> UK, 'Tropical Modern', p. 112-125, 2024"
+    ]},
+    { "group": "Domestic", "items": [
+      "<strong>Adipiscing Digest,</strong> 'The 2026 AD100', p. 156, Mar/Apr 2026",
+      "<strong>Vogue Elit,</strong> 'Vantage Point', p. 96-97, Jul 2025",
+      "<strong>Robb Sed,</strong> 'Ultimate Homes 2025', p. 76-85, Jun 2025",
+      "<strong>Home Do,</strong> 'The Library House' (Cover Story), p. 26-33, Jul 2024",
+      "<strong>Inside Eiusmod,</strong> 'Sample Portfolio Design a Clubhouse', p. 128-138, May 2024"
+    ]}
+  ],
+
+  "awards": [
+    { "group": "2026", "items": [
+      "<strong>Lorem Design Honours</strong> &mdash; Winner, Top 10 Houses in the country.",
+      "<strong>Ipsum Excellence Awards</strong> &mdash; Winner, Best Interior."
+    ]},
+    { "group": "2025", "items": [
+      "<strong>World Lorem Festival</strong>, Singapore &mdash; Finalist, House and Villa Category.",
+      "<strong>Adipiscing Digest</strong> &mdash; AD100, most influential names in Architecture and Design.",
+      "<strong>Consectetur Design Awards</strong> &mdash; Winner for Dolor Sit Villa."
+    ]},
+    { "group": "2024", "items": [
+      "<strong>Tempor Awards</strong> &mdash; Winner, Architect of the Year.",
+      "<strong>The D-List</strong> &mdash; Included among top names in Architecture and Design."
+    ]},
+    { "group": "2023", "items": [
+      "<strong>Incididunt Institute</strong> National Awards &mdash; Winner, Leisure and Entertainment.",
+      "<strong>Labore Magazine</strong> &mdash; List of Top 10 Architects."
+    ]},
+    { "group": "2022", "items": [
+      "<strong>Magna Aliqua Awards</strong> &mdash; Commendation, Residential Project of the Year."
+    ]}
+  ],
+
+  "books": [
+    { "group": "Books", "items": [
+      "<strong>Living on Lorem: Contemporary Houses,</strong> Ipsum Press, London, 2026",
+      "<strong>Modern Dolor: Houses in the Sun,</strong> Sit Amet Books, New York, 2025",
+      "<strong>Timeless Lorem,</strong> Consectetur Publishers, India, 2024",
+      "<strong>X. Houses in Adipiscing,</strong> Elit Publishers, India, 2023",
+      "<strong>50 Amazing Lorem Homes,</strong> Sed Do Publishers, India, 2022",
+      "<strong>Tropical Ipsum: Dream Houses,</strong> Eiusmod Publishing, Germany, 2021",
+      "<strong>Atlas of World Lorem,</strong> Tempor Publishing, Germany, 2020"
+    ]}
+  ]
+}

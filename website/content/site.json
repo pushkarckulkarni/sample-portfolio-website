@@ -1,0 +1,68 @@
+{
+  "_comment": "Global site settings. Everything here appears on every page. Edit, then run: python3 tools/build.py",
+  "brand": "Sample Portfolio",
+  "tagline": "Architecture + Interiors",
+  "domain": "https://sampleportfolio.com",
+  "email": "studio@sampleportfolio.com",
+  "phone": "+91 00 0000 0000",
+  "phoneAlt": "+91 00 0000 0001",
+  "copyrightYear": "2026",
+  "address": [
+    "#00, 00th Main",
+    "Lorem Ipsum Stage, Indiranagar",
+    "Bengaluru 560008",
+    "India"
+  ],
+  "enquiryEmail": "projects@sampleportfolio.com",
+  "careersEmail": "careers@sampleportfolio.com",
+  "careersNote": "For portfolios above 10 MB, please send a download link.",
+  "social": [
+    {
+      "label": "Instagram",
+      "url": "#"
+    },
+    {
+      "label": "LinkedIn",
+      "url": "#"
+    },
+    {
+      "label": "Pinterest",
+      "url": "#"
+    }
+  ],
+  "categories": [
+    {
+      "slug": "all",
+      "label": "All"
+    },
+    {
+      "slug": "architecture",
+      "label": "Architecture"
+    },
+    {
+      "slug": "sports-planning",
+      "label": "Sports Planning"
+    },
+    {
+      "slug": "institutional",
+      "label": "Institutional"
+    },
+    {
+      "slug": "masterplanning",
+      "label": "Masterplanning"
+    },
+    {
+      "slug": "interior-design",
+      "label": "Interior Design"
+    }
+  ],
+  "home": {
+    "heroCaption": "Lorem Ipsum House",
+    "heroCaptionMeta": "Bengaluru, 2025",
+    "heroInterval": 6000,
+    "selectedWorkLabel": "Selected Work",
+    "practiceLabel": "The Practice",
+    "practiceText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "latestLabel": "Latest"
+  }
+}

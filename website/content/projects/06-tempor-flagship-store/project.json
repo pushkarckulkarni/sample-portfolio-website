@@ -1,0 +1,58 @@
+{
+  "slug": "06-tempor-flagship-store",
+  "title": "Tempor Flagship Store",
+  "location": "Mumbai",
+  "year": "2023",
+  "category": "interior-design",
+  "featured": false,
+  "order": 6,
+  "cover": "cover.jpg",
+  "hero": "hero.jpg",
+  "intro": [
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo."
+  ],
+  "pullQuote": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+  "pullQuoteAfter": 2,
+  "gallery": [
+    {
+      "file": "gallery/01.jpg",
+      "caption": "",
+      "layout": "full"
+    },
+    {
+      "file": "gallery/02.jpg",
+      "caption": "",
+      "layout": "pair"
+    },
+    {
+      "file": "gallery/03.jpg",
+      "caption": "",
+      "layout": "pair"
+    },
+    {
+      "file": "gallery/04.jpg",
+      "caption": "",
+      "layout": "full"
+    },
+    {
+      "file": "gallery/05.jpg",
+      "caption": "",
+      "layout": "pair"
+    },
+    {
+      "file": "gallery/06.jpg",
+      "caption": "",
+      "layout": "pair"
+    }
+  ],
+  "credits": {
+    "Location": "Mumbai, India",
+    "Year": "2023",
+    "Area": "640 sqm",
+    "Client": "Private",
+    "Team": "Lorem I., Ipsum D.",
+    "Photography": "Consectetur Studio"
+  }
+}

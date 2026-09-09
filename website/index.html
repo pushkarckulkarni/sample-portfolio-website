@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sample Portfolio — Architecture + Interiors</title>
+<meta name="description" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, q">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sample Portfolio — Architecture + Interiors">
+<meta property="og:description" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, q">
+<meta property="og:image" content="https://sampleportfolio.com/content/home/hero/01.jpg">
+<link rel="preload" as="image" href="content/home/hero/01.jpg" fetchpriority="high">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/responsive.css">
+<script>document.documentElement.className=document.documentElement.className.replace('no-js','js');</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ================= M-01 HEADER ================= -->
+<header class="site-header">
+  <div class="site-header__bar">
+    <a class="site-logo" href="index.html">
+      <span class="site-logo__mark">Sample Portfolio</span>
+      <span class="site-logo__sub">Architecture + Interiors</span>
+    </a>
+
+    <nav class="nav-primary" aria-label="Primary">
+      <ul class="nav-primary__list">
+        <li class="nav-primary__item">
+          <a class="nav-primary__link" href="projects.html">Projects</a>
+          <ul class="nav-drop">
+            <li><a class="nav-drop__link" href="projects.html">All</a></li>
+            <li><a class="nav-drop__link" href="projects.html?cat=architecture">Architecture</a></li>
+            <li><a class="nav-drop__link" href="projects.html?cat=sports-planning">Sports Planning</a></li>
+            <li><a class="nav-drop__link" href="projects.html?cat=institutional">Institutional</a></li>
+            <li><a class="nav-drop__link" href="projects.html?cat=masterplanning">Masterplanning</a></li>
+            <li><a class="nav-drop__link" href="projects.html?cat=interior-design">Interior Design</a></li>
+          </ul>
+        </li>
+        <li class="nav-primary__item"><a class="nav-primary__link" href="about.html">About</a></li>
+        <li class="nav-primary__item">
+          <a class="nav-primary__link" href="news.html">News</a>
+          <ul class="nav-drop">
+            <li><a class="nav-drop__link" href="news.html">Highlights</a></li>
+            <li><a class="nav-drop__link" href="press.html">Press</a></li>
+            <li><a class="nav-drop__link" href="awards.html">Awards</a></li>
+            <li><a class="nav-drop__link" href="books.html">Books</a></li>
+          </ul>
+        </li>
+        <li class="nav-primary__item"><a class="nav-primary__link" href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span class="nav-toggle__bar"></span><span class="nav-toggle__bar"></span><span class="nav-toggle__bar"></span>
+    </button>
+  </div>
+</header>
+
+<!-- ================= M-03 MOBILE MENU ================= -->
+<div class="mobile-menu" id="mobile-menu">
+  <nav aria-label="Mobile">
+    <a class="mobile-menu__link" href="projects.html">Projects</a>
+    <div class="mobile-menu__sub">
+      <a class="mobile-menu__sublink" href="projects.html">All</a>
+      <a class="mobile-menu__sublink" href="projects.html?cat=architecture">Architecture</a>
+      <a class="mobile-menu__sublink" href="projects.html?cat=sports-planning">Sports Planning</a>
+      <a class="mobile-menu__sublink" href="projects.html?cat=institutional">Institutional</a>
+      <a class="mobile-menu__sublink" href="projects.html?cat=masterplanning">Masterplanning</a>
+      <a class="mobile-menu__sublink" href="projects.html?cat=interior-design">Interior Design</a>
+    </div>
+    <a class="mobile-menu__link" href="about.html">About</a>
+    <a class="mobile-menu__link" href="news.html">News</a>
+    <div class="mobile-menu__sub">
+      <a class="mobile-menu__sublink" href="news.html">Highlights</a>
+      <a class="mobile-menu__sublink" href="press.html">Press</a>
+      <a class="mobile-menu__sublink" href="awards.html">Awards</a>
+      <a class="mobile-menu__sublink" href="books.html">Books</a>
+    </div>
+    <a class="mobile-menu__link" href="contact.html">Contact</a>
+  </nav>
+  <p class="mobile-menu__foot">studio@sampleportfolio.com<br>+91 00 0000 0000</p>
+</div>
+
+<main id="main">
+  <!-- ================= M-04 HERO SLIDER ================= -->
+  <section class="hero" data-interval="6000" tabindex="-1" aria-roledescription="carousel" aria-label="Featured projects">
+    <div class="hero__slide is-active" role="group" aria-label="1 of 5">
+      <img class="hero__img" src="content/home/hero/01.jpg" alt="Featured project 1" width="2400" height="1350" fetchpriority="high">
+    </div>
+    <div class="hero__slide" role="group" aria-label="2 of 5">
+      <img class="hero__img" src="content/home/hero/02.jpg" alt="Featured project 2" width="2400" height="1350" loading="lazy">
+    </div>
+    <div class="hero__slide" role="group" aria-label="3 of 5">
+      <img class="hero__img" src="content/home/hero/03.jpg" alt="Featured project 3" width="2400" height="1350" loading="lazy">
+    </div>
+    <div class="hero__slide" role="group" aria-label="4 of 5">
+      <img class="hero__img" src="content/home/hero/04.jpg" alt="Featured project 4" width="2400" height="1350" loading="lazy">
+    </div>
+    <div class="hero__slide" role="group" aria-label="5 of 5">
+      <img class="hero__img" src="content/home/hero/05.jpg" alt="Featured project 5" width="2400" height="1350" loading="lazy">
+    </div>
+
+    <div class="hero__scrim"></div>
+    <button class="hero__nav hero__nav--prev" aria-label="Previous slide"></button>
+    <button class="hero__nav hero__nav--next" aria-label="Next slide"></button>
+
+    <div class="hero__caption">
+      <h1 class="hero__title">Lorem Ipsum House</h1>
+      <p class="hero__meta">Bengaluru, 2025</p>
+    </div>
+
+    <div class="hero__dots" role="tablist" aria-label="Slide navigation">
+      <button class="hero__dot is-active" role="tab" aria-label="Slide 1"></button>
+      <button class="hero__dot" role="tab" aria-label="Slide 2"></button>
+      <button class="hero__dot" role="tab" aria-label="Slide 3"></button>
+      <button class="hero__dot" role="tab" aria-label="Slide 4"></button>
+      <button class="hero__dot" role="tab" aria-label="Slide 5"></button>
+    </div>
+
+    <div class="hero__cue"><span class="hero__cue-line"></span>Scroll</div>
+  </section>
+
+  <!-- ================= SELECTED WORK ================= -->
+  <section class="u-container u-section">
+    <header class="about-section__head" data-reveal><h2 class="u-label">Selected Work</h2></header>
+    <div class="grid grid--dim">
+      <a class="card" href="project-01-lorem-ipsum-house.html" data-cats="architecture" data-reveal data-reveal-delay="0">
+        <div class="card__media"><img class="card__img" src="content/projects/01-lorem-ipsum-house/cover.jpg" alt="Lorem Ipsum House" width="1200" height="900" loading="lazy"></div>
+        <div class="card__body">
+          <h3 class="card__title">Lorem Ipsum House</h3>
+          <p class="card__meta">Bengaluru, 2025</p>
+        </div>
+      </a>
+      <a class="card" href="project-02-dolor-sit-villa.html" data-cats="architecture" data-reveal data-reveal-delay="1">
+        <div class="card__media"><img class="card__img" src="content/projects/02-dolor-sit-villa/cover.jpg" alt="Dolor Sit Villa" width="1200" height="900" loading="lazy"></div>
+        <div class="card__body">
+          <h3 class="card__title">Dolor Sit Villa</h3>
+          <p class="card__meta">Pune, 2025</p>
+        </div>
+      </a>
+      <a class="card" href="project-03-consectetur-clubhouse.html" data-cats="institutional" data-reveal data-reveal-delay="2">
+        <div class="card__media"><img class="card__img" src="content/projects/03-consectetur-clubhouse/cover.jpg" alt="Consectetur Clubhouse" width="1200" height="900" loading="lazy"></div>
+        <div class="card__body">
+          <h3 class="card__title">Consectetur Clubhouse</h3>
+          <p class="card__meta">Raipur, 2024</p>
+        </div>
+      </a>
+      <a class="card" href="project-04-adipiscing-retreat.html" data-cats="institutional" data-reveal data-reveal-delay="0">
+        <div class="card__media"><img class="card__img" src="content/projects/04-adipiscing-retreat/cover.jpg" alt="Adipiscing Retreat" width="1200" height="900" loading="lazy"></div>
+        <div class="card__body">
+          <h3 class="card__title">Adipiscing Retreat</h3>
+          <p class="card__meta">Goa, 2024</p>
+        </div>
+      </a>
+      <a class="card" href="project-05-elit-sed-offices.html" data-cats="masterplanning" data-reveal data-reveal-delay="1">
+        <div class="card__media"><img class="card__img" src="content/projects/05-elit-sed-offices/cover.jpg" alt="Elit Sed Offices" width="1200" height="900" loading="lazy"></div>
+        <div class="card__body">
+          <h3 class="card__title">Elit Sed Offices</h3>
+          <p class="card__meta">Bengaluru, 2023</p>
+        </div>
+      </a>
+    </div>
+    <div class="pager"><a class="pager__btn" href="projects.html">All Projects</a></div>
+  </section>
+
+  <!-- ================= PRACTICE ================= -->
+  <section class="u-container u-container--prose u-section u-rule">
+    <h2 class="u-label" data-reveal>The Practice</h2>
+    <p class="pd-intro" data-reveal data-reveal-delay="1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <div class="u-text-center"><a class="pager__btn" href="about.html">About the Studio</a></div>
+  </section>
+
+  <!-- ================= LATEST ================= -->
+  <section class="u-container u-section u-rule">
+    <header class="about-section__head" data-reveal><h2 class="u-label">Latest</h2></header>
+    <div class="grid">
+      <a class="news-card" href="#" data-reveal data-reveal-delay="0">
+        <div class="news-card__media"><img class="news-card__img" src="content/news/01.jpg" alt="" width="1000" height="750" loading="lazy"></div>
+        <p class="news-card__body"><strong>Sample Portfolio</strong> wins two awards at the <strong>Lorem Design Honours</strong> 2026 for <strong>Top 10 Houses</strong>.</p>
+        <p class="news-card__date">March 2026</p>
+      </a>
+      <a class="news-card" href="#" data-reveal data-reveal-delay="1">
+        <div class="news-card__media"><img class="news-card__img" src="content/news/02.jpg" alt="" width="1000" height="750" loading="lazy"></div>
+        <p class="news-card__body"><strong>Dolor Sit Villa</strong> featured as the <strong>Cover Story</strong> in <strong>Ipsum Review</strong>.</p>
+        <p class="news-card__date">January 2026</p>
+      </a>
+      <a class="news-card" href="#" data-reveal data-reveal-delay="2">
+        <div class="news-card__media"><img class="news-card__img" src="content/news/03.jpg" alt="" width="1000" height="750" loading="lazy"></div>
+        <p class="news-card__body"><strong>Consectetur Clubhouse</strong> shortlisted at the <strong>World Lorem Festival</strong>, Singapore.</p>
+        <p class="news-card__date">November 2025</p>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= M-12 FOOTER ================= -->
+<footer class="site-footer">
+  <div class="u-container">
+    <div class="site-footer__row">
+      <a href="mailto:studio@sampleportfolio.com">studio@sampleportfolio.com</a>
+      <nav class="site-footer__social" aria-label="Social"><a href="#">Instagram</a><a href="#">LinkedIn</a><a href="#">Pinterest</a></nav>
+      <p>&copy; Sample Portfolio 2026</p>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" aria-label="Back to top">&uarr;</button>
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>

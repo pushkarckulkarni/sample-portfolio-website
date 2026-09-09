@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Image Studio — Sample Portfolio</title>
+<style>
+  :root{
+    --bg:#111211; --panel:#1a1c1a; --panel2:#212421; --line:#2e322e;
+    --ink:#e8e6e1; --mute:#8f938d; --accent:#c8b78a; --ok:#7fb069; --warn:#d98b5f;
+    --ui:'Jost','Futura','Century Gothic',system-ui,sans-serif;
+    --mono:ui-monospace,'SF Mono',Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ui);
+       font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent)}
+  header{padding:22px 28px;border-bottom:1px solid var(--line);
+         display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+  h1{margin:0;font-size:15px;font-weight:500;text-transform:uppercase;letter-spacing:.18em}
+  .sub{color:var(--mute);font-size:12px;letter-spacing:.06em}
+  .wrap{padding:28px;max-width:1180px;margin:0 auto}
+
+  .bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+       padding:16px;background:var(--panel);border:1px solid var(--line);
+       border-radius:3px;margin-bottom:24px}
+  label{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--mute)}
+  select,input[type=number]{background:var(--panel2);color:var(--ink);
+       border:1px solid var(--line);border-radius:2px;padding:7px 9px;font-family:var(--ui);font-size:13px}
+  button{background:var(--accent);color:#161715;border:0;border-radius:2px;
+       padding:9px 18px;font-family:var(--ui);font-size:11px;font-weight:500;
+       text-transform:uppercase;letter-spacing:.14em;cursor:pointer;transition:opacity .15s}
+  button:hover{opacity:.85}
+  button.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+  button:disabled{opacity:.35;cursor:not-allowed}
+  .spacer{flex:1}
+
+  .toggle{display:flex;align-items:center;gap:7px;color:var(--mute);
+          font-size:11px;text-transform:uppercase;letter-spacing:.1em;cursor:pointer}
+
+  h2{font-size:11px;text-transform:uppercase;letter-spacing:.16em;
+     color:var(--mute);margin:32px 0 12px;font-weight:500}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:3px;
+        margin-bottom:10px;overflow:hidden}
+  .card__head{display:flex;align-items:center;gap:14px;padding:14px 16px;cursor:pointer}
+  .card__head:hover{background:var(--panel2)}
+  .badge{font-family:var(--mono);font-size:10px;padding:3px 8px;border-radius:2px;
+         background:var(--panel2);border:1px solid var(--line);color:var(--accent);
+         letter-spacing:.04em;white-space:nowrap}
+  .path{font-family:var(--mono);font-size:12.5px;flex:1;min-width:0;
+        overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .dim{color:var(--mute);font-size:11.5px;font-family:var(--mono);white-space:nowrap}
+  .files{display:none;border-top:1px solid var(--line);background:#151715}
+  .card.open .files{display:block}
+  .file{display:flex;align-items:center;gap:12px;padding:8px 16px 8px 44px;
+        font-family:var(--mono);font-size:11.5px;border-top:1px solid #1e211e}
+  .file:first-child{border-top:0}
+  .file .nm{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .arrow{color:var(--mute)}
+  .thumb{width:54px;height:36px;object-fit:cover;border-radius:2px;background:var(--panel2);flex:0 0 auto}
+
+  table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:11.5px}
+  th{text-align:left;color:var(--mute);font-weight:400;padding:8px 10px;
+     border-bottom:1px solid var(--line);text-transform:uppercase;letter-spacing:.08em;font-size:10px}
+  td{padding:7px 10px;border-bottom:1px solid #1e211e}
+  tr:hover td{background:var(--panel2)}
+  .good{color:var(--ok)} .bad{color:var(--warn)}
+
+  .empty{padding:34px;text-align:center;color:var(--mute);
+         border:1px dashed var(--line);border-radius:3px;line-height:1.9}
+  .empty code{font-family:var(--mono);color:var(--accent);font-size:12px}
+
+  .stats{display:flex;gap:26px;flex-wrap:wrap;padding:16px;background:var(--panel);
+         border:1px solid var(--line);border-radius:3px;margin-bottom:20px}
+  .stat b{display:block;font-size:22px;font-weight:300;letter-spacing:-.01em}
+  .stat span{font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--mute)}
+
+  #log{white-space:pre-wrap;font-family:var(--mono);font-size:11.5px;color:var(--mute);
+       background:#0d0e0d;border:1px solid var(--line);border-radius:3px;
+       padding:14px;max-height:260px;overflow:auto;display:none}
+  .busy{pointer-events:none;opacity:.5}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Image Studio</h1>
+  <span class="sub" id="paths">loading…</span>
+</header>
+
+<div class="wrap" id="app">
+
+  <div class="bar">
+    <label for="only">Scope</label>
+    <select id="only"><option value="">Everything in inbox</option></select>
+
+    <label for="anchor">Crop from</label>
+    <select id="anchor">
+      <option value="">Preset default</option>
+      <option value="smart">Smart (most detail)</option>
+      <option value="center">Centre</option>
+      <option value="top">Top</option>
+      <option value="bottom">Bottom</option>
+    </select>
+
+    <label for="maxkb">Max KB</label>
+    <input type="number" id="maxkb" placeholder="preset" min="40" max="2000" step="10" style="width:88px">
+
+    <span class="toggle"><input type="checkbox" id="keep"><label for="keep" style="cursor:pointer">Keep originals</label></span>
+
+    <span class="spacer"></span>
+    <button class="ghost" id="refresh">Rescan</button>
+    <button class="ghost" id="dry">Preview</button>
+    <button id="run">Process</button>
+  </div>
+
+  <div id="stats"></div>
+  <div id="pending"></div>
+  <div id="results"></div>
+  <pre id="log"></pre>
+
+  <h2>Currently on the site</h2>
+  <div id="live"></div>
+
+</div>
+
+<script>
+const $  = s => document.querySelector(s);
+const el = (t,c,h) => { const n=document.createElement(t); if(c)n.className=c; if(h!=null)n.innerHTML=h; return n; };
+let DATA = null;
+
+async function scan(){
+  const r = await fetch('/api/scan'); DATA = await r.json();
+  $('#paths').textContent = 'inbox → website/content';
+
+  // scope dropdown
+  const only = $('#only'); const cur = only.value;
+  only.innerHTML = '<option value="">Everything in inbox</option>';
+  DATA.tree.forEach(n => {
+    const o = el('option'); o.value = n.folder; o.textContent = n.folder + '  (' + n.count + ')';
+    only.appendChild(o);
+  });
+  only.value = cur;
+
+  renderPending();
+  renderLive();
+}
+
+function renderPending(){
+  const host = $('#pending'); host.innerHTML = '';
+  const stats = $('#stats'); stats.innerHTML = '';
+
+  if(!DATA.tree.length){
+    host.appendChild(el('div','empty',
+      'No photographs waiting.<br><br>Drop your full-size files into the matching folder inside<br>' +
+      '<code>image-prep/inbox/</code><br>then press <b>Rescan</b>.'));
+  } else {
+    const files = DATA.tree.reduce((a,n)=>a+n.count,0);
+    const kb    = DATA.tree.reduce((a,n)=>a+n.totalKB,0);
+    stats.appendChild(el('div','stats',
+      `<div class="stat"><b>${files}</b><span>Images waiting</span></div>
+       <div class="stat"><b>${(kb/1024).toFixed(1)} MB</b><span>Current size</span></div>
+       <div class="stat"><b>${DATA.tree.length}</b><span>Folders</span></div>`));
+
+    host.appendChild(el('h2',null,'Waiting to be processed'));
+    DATA.tree.forEach(n => {
+      const c = el('div','card');
+      c.appendChild(el('div','card__head',
+        `<span class="badge">${n.preset}</span>
+         <span class="path">${n.folder}</span>
+         <span class="dim">${n.count} file${n.count>1?'s':''} · ${n.totalHuman}</span>
+         <span class="dim">→ ${n.target} · ${n.ratio} · ≤${n.maxKB}KB</span>`));
+      const fl = el('div','files');
+      n.files.forEach(f => {
+        const row = el('div','file',
+          `<img class="thumb" loading="lazy" src="/api/preview?rel=${encodeURIComponent(f.rel)}" alt="">
+           <span class="nm">${f.name}</span>
+           <span class="dim">${f.kb} KB</span>
+           <span class="arrow">→</span>
+           <span class="dim">${f.to}</span>`);
+        fl.appendChild(row);
+      });
+      c.appendChild(fl);
+      c.querySelector('.card__head').onclick = () => c.classList.toggle('open');
+      host.appendChild(c);
+    });
+  }
+
+  if(DATA.unrouted.length){
+    host.appendChild(el('h2',null,'Not recognised — these will be ignored'));
+    DATA.unrouted.forEach(u => host.appendChild(el('div','card',
+      `<div class="card__head"><span class="badge" style="color:var(--warn)">skip</span>
+       <span class="path">${u.rel}</span><span class="dim">${u.why}</span></div>`)));
+  }
+}
+
+function renderLive(){
+  const host = $('#live'); host.innerHTML='';
+  const t = el('table');
+  t.innerHTML = '<tr><th>Slot</th><th>Images</th></tr>';
+  Object.entries(DATA.live).forEach(([k,v]) => {
+    t.innerHTML += `<tr><td>${k}</td><td class="${v?'good':'bad'}">${v}</td></tr>`;
+  });
+  DATA.projects.forEach(p => {
+    const ok = p.cover && p.hero && p.gallery>0;
+    t.innerHTML += `<tr><td>projects/${p.slug}</td><td class="${ok?'good':'bad'}">`+
+      `cover ${p.cover?'✓':'—'} · hero ${p.hero?'✓':'—'} · gallery ${p.gallery}</td></tr>`;
+  });
+  host.appendChild(t);
+}
+
+async function go(dry){
+  const body = {
+    only:   $('#only').value || null,
+    anchor: $('#anchor').value || null,
+    maxKB:  $('#maxkb').value || null,
+    keep:   $('#keep').checked,
+    dryRun: dry
+  };
+  $('#app').classList.add('busy');
+  $('#run').textContent = dry ? 'Previewing…' : 'Processing…';
+  try{
+    const r = await fetch('/api/process',{method:'POST',headers:{'Content-Type':'application/json'},
+                                          body:JSON.stringify(body)});
+    const d = await r.json();
+    renderResults(d);
+    if(!dry) await scan();
+  } catch(e){
+    $('#log').style.display='block'; $('#log').textContent = String(e);
+  }
+  $('#app').classList.remove('busy');
+  $('#run').textContent = 'Process';
+}
+
+function renderResults(d){
+  const host = $('#results'); host.innerHTML='';
+  if(!d.ok){ host.appendChild(el('div','empty', d.error || 'Nothing to do.')); return; }
+
+  host.appendChild(el('h2',null, d.dry ? 'Preview — nothing was written' : 'Done'));
+  if(!d.dry){
+    host.appendChild(el('div','stats',
+      `<div class="stat"><b>${d.beforeHuman}</b><span>Before</span></div>
+       <div class="stat"><b>${d.afterHuman}</b><span>After</span></div>
+       <div class="stat"><b>${d.savedPct}%</b><span>Smaller</span></div>
+       <div class="stat"><b>${d.records.length}</b><span>Processed</span></div>`));
+  }
+
+  const t = el('table');
+  t.innerHTML = '<tr><th>Source</th><th>Preset</th><th>Was</th><th>Now</th><th>Q</th><th>Written to</th><th>Note</th></tr>';
+  d.records.forEach(r => {
+    t.innerHTML += `<tr>
+      <td>${(r.rel||r.src||'').split('/').pop()}</td>
+      <td>${r.preset}</td>
+      <td>${r.beforeKB??'—'} KB</td>
+      <td class="${r.ok?'good':'bad'}">${r.afterKB??'—'} KB</td>
+      <td>${r.quality??'—'}</td>
+      <td>${r.dst||'—'}</td>
+      <td class="${r.note?'bad':''}">${r.note||''}</td></tr>`;
+  });
+  host.appendChild(t);
+
+  if(!d.dry){
+    const b = el('button',null,'Rebuild the website now');
+    b.style.marginTop='18px';
+    b.onclick = async () => {
+      b.disabled = true; b.textContent = 'Building…';
+      const r = await fetch('/api/build',{method:'POST'});
+      const j = await r.json();
+      $('#log').style.display='block';
+      $('#log').textContent = j.out;
+      b.textContent = j.ok ? 'Built ✓' : 'Build failed — see log';
+    };
+    host.appendChild(b);
+    if(d.jsonUpdated && d.jsonUpdated.length){
+      host.appendChild(el('p','dim','Gallery lists updated in: ' + d.jsonUpdated.join(', ')));
+    }
+  }
+}
+
+$('#refresh').onclick = scan;
+$('#dry').onclick     = () => go(true);
+$('#run').onclick     = () => go(false);
+scan();
+</script>
+</body>
+</html>

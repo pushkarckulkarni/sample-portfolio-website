@@ -1,0 +1,174 @@
+/* ==========================================================================
+   SAMPLE PORTFOLIO — DESIGN TOKENS
+   Single source of truth. Change values here, never hard-code in components.
+   ========================================================================== */
+
+:root {
+
+  /* ---------- COLOUR ----------------------------------------------------
+     Deliberately monochrome. An architecture portfolio's colour comes from
+     the photography; the chrome must recede to near-invisibility.          */
+
+  --c-bg:            #ffffff;   /* page background, header background      */
+  --c-bg-alt:        #f4f3f1;   /* image placeholder / subtle section fill  */
+  --c-ink:           #1a1a1a;   /* primary text, logo                       */
+  --c-ink-soft:      #4a4a4a;   /* body paragraphs                          */
+  --c-ink-mute:      #8c8c8c;   /* captions, meta, inactive nav             */
+  --c-rule:          #e2e0dc;   /* hairline dividers                        */
+  --c-rule-strong:   #c9c6c0;
+  --c-overlay:       rgba(255,255,255,.94);  /* mobile menu / sticky header */
+  --c-scrim:         rgba(0,0,0,.86);        /* lightbox backdrop           */
+
+  /* Type and controls that sit ON TOP of photography. Kept as tokens so a
+     future dark-image treatment can be changed in one place. */
+  --c-on-image:      #ffffff;
+  --c-on-image-soft: rgba(255,255,255,.80);
+  --c-on-image-dim:  rgba(255,255,255,.45);
+
+  /* Focus ring — accessibility, must stay visible */
+  --c-focus:         #1a1a1a;
+
+
+  /* ---------- TYPEFACES -------------------------------------------------
+     --font-ui   : nav, labels, headings, captions. Geometric grotesque,
+                   used ONLY in uppercase with heavy tracking for chrome.
+     --font-body : long-form prose. Neutral grotesque, high x-height.
+     Both are self-hosted (see /assets/fonts) so Hostinger has no CDN
+     dependency and there is no FOUT on first paint.                        */
+
+  --font-ui:   'Jost', 'Futura', 'Century Gothic', 'Avenir Next', sans-serif;
+  --font-body: 'Inter', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+
+
+  /* ---------- TYPE SCALE ------------------------------------------------
+     Ratio 1.25 (major third) off a 16px base. Fluid via clamp() between
+     the 480px and 1440px viewports so nothing needs a breakpoint override. */
+
+  --fs-nano:   0.6875rem;                              /* 11px — nav, tabs  */
+  --fs-micro:  0.75rem;                                /* 12px — captions   */
+  --fs-small:  0.8125rem;                              /* 13px — meta       */
+  --fs-body:   clamp(0.875rem, 0.82rem + 0.22vw, 1rem);        /* 14→16     */
+  --fs-lead:   clamp(1rem,     0.92rem + 0.34vw, 1.25rem);     /* 16→20     */
+  --fs-h4:     clamp(0.9375rem,0.90rem + 0.16vw, 1.0625rem);   /* 15→17     */
+  --fs-h3:     clamp(1.125rem, 1.02rem + 0.45vw, 1.5rem);      /* 18→24     */
+  --fs-h2:     clamp(1.375rem, 1.15rem + 0.94vw, 2.125rem);    /* 22→34     */
+  --fs-h1:     clamp(1.75rem,  1.32rem + 1.80vw, 3.25rem);     /* 28→52     */
+  --fs-quote:  clamp(1.125rem, 0.95rem + 0.75vw, 1.75rem);     /* 18→28     */
+
+  /* Weights — the whole system lives between 300 and 500. Never bolder. */
+  --fw-light:   300;
+  --fw-regular: 400;
+  --fw-medium:  500;
+
+  /* Line heights */
+  --lh-tight: 1.15;   /* display headings                */
+  --lh-snug:  1.35;   /* sub-heads, card titles          */
+  --lh-body:  1.75;   /* long-form paragraphs — generous */
+  --lh-ui:    1.2;    /* nav items                       */
+
+  /* Letter-spacing — the signature move of this design language.
+     Uppercase chrome is tracked out hard; prose is tracked normally. */
+  --ls-chrome:  0.16em;   /* main nav, section labels    */
+  --ls-tab:     0.12em;   /* sub-nav / filter tabs       */
+  --ls-caption: 0.08em;   /* image captions, meta        */
+  --ls-title:   0.02em;   /* card titles                 */
+  --ls-body:    0;
+
+
+  /* ---------- SPACING SCALE --------------------------------------------
+     Geometric-ish 4px base. Use ONLY these. Section rhythm uses --sp-*
+     tokens so vertical proportion stays consistent across every page.     */
+
+  --sp-1:   4px;
+  --sp-2:   8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  24px;
+  --sp-6:  32px;
+  --sp-7:  48px;
+  --sp-8:  64px;
+  --sp-9:  96px;
+  --sp-10: 128px;
+  --sp-11: 160px;
+
+  /* Fluid section padding — collapses on mobile without a media query */
+  --section-y:  clamp(48px, 3vw + 32px, 112px);
+  --section-y-lg: clamp(64px, 5vw + 40px, 160px);
+
+
+  /* ---------- LAYOUT ----------------------------------------------------
+     Gutter is fluid; max-width caps at 1600 so the grid never sprawls on
+     ultrawide displays. Prose is capped at 68ch for readability.          */
+
+  --gutter:      clamp(16px, 4vw, 56px);
+  --max-page:    1600px;   /* projects grid, news grid            */
+  --max-wide:    1320px;   /* about sections                      */
+  --max-prose:   68ch;     /* body copy measure                   */
+  --max-narrow:  46ch;     /* pull quotes                         */
+
+  /* Header */
+  --header-h:        84px;    /* desktop                          */
+  --header-h-sub:   124px;    /* desktop, when sub-nav row shown   */
+  --header-h-mob:    60px;    /* < 900px                          */
+
+  /* Grid */
+  --grid-gap-x: clamp(12px, 1.6vw, 28px);
+  --grid-gap-y: clamp(28px, 3.4vw, 64px);
+
+
+  /* ---------- ASPECT RATIOS --------------------------------------------
+     Locked ratios are what make a portfolio grid read as "designed".
+     Never let an image size itself.                                       */
+
+  --ar-hero:      16 / 9;    /* homepage slider (desktop)          */
+  --ar-hero-mob:   4 / 5;    /* homepage slider (portrait phones)  */
+  --ar-card:       4 / 3;    /* project grid tile                  */
+  --ar-detail:     3 / 2;    /* project detail body image          */
+  --ar-portrait:   4 / 5;    /* principal photo                    */
+  --ar-square:     1 / 1;    /* team photo                         */
+  --ar-news:       4 / 3;    /* news card                          */
+
+
+  /* ---------- MOTION ----------------------------------------------------
+     Restrained. Everything is a fade or a very small translate. No bounce,
+     no spring, no scale-on-hover beyond 1.03.                             */
+
+  --dur-fast:  180ms;
+  --dur-base:  320ms;
+  --dur-slow:  700ms;
+  --dur-hero: 1200ms;   /* slider crossfade                        */
+
+  --ease:      cubic-bezier(.22,.61,.36,1);    /* ease-out-quad-ish */
+  --ease-soft: cubic-bezier(.4,0,.2,1);
+
+  --img-zoom: 1.03;     /* hover scale on grid tiles               */
+
+
+  /* ---------- Z-INDEX SCALE --------------------------------------------- */
+  --z-base:      1;
+  --z-sticky:  100;
+  --z-header:  200;
+  --z-menu:    300;
+  --z-lightbox:400;
+  --z-toast:   500;
+}
+
+
+/* Phones: tighten the header and lift caption sizes slightly so small
+   uppercase type stays legible at arm's length. */
+@media (max-width: 899px) {
+  :root {
+    --header-h:     var(--header-h-mob);
+    --header-h-sub: var(--header-h-mob);
+    --fs-nano:      0.75rem;
+    --ls-chrome:    0.14em;
+  }
+}
+
+/* Respect the OS setting. Non-negotiable. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 1ms; --dur-base: 1ms; --dur-slow: 1ms; --dur-hero: 1ms;
+    --img-zoom: 1;
+  }
+}
